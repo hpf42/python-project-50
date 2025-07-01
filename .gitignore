@@ -1,0 +1,4 @@
+.venv
+.vscode/*
+*.cast
+__pycache__/
