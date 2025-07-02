@@ -1,3 +1,6 @@
+.PHONY: clean install build gendiff
+
+
 clean:
 	rm -rf dist/ build/ *.egg-info
 
@@ -9,3 +12,6 @@ build:
 
 gendiff:
 	uv run gendiff
+
+# gendiff:
+# 	uv venv exec gendiff
