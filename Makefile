@@ -11,7 +11,6 @@ build:
 	uv build
 
 gendiff:
-	uv run gendiff
+	uv run gendiff/scripts/gendiff.py
 
-# gendiff:
-# 	uv venv exec gendiff
+

@@ -2,7 +2,7 @@
 author = "Talko Denis"
 name = "hexlet-code"
 version = "0.1.0"
-description = "Add your description here"
+description = "Second project"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

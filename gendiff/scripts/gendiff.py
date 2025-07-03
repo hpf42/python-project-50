@@ -2,8 +2,7 @@ import argparse
 
 
 def main():
-    print('HELLO')
-    print('Let us go')
+    print('Start')
     parser = argparse.ArgumentParser()
     parser.parse_args()
     print('Finish')
