@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = []
 
 [project.scripts]
-gendiff = 'gendiff.scripts.gendiff:main'
+gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.hatch.build.targets.wheel]
-packeges = ['gendiff']
+packeges = ["gendiff"]
