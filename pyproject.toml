@@ -10,4 +10,4 @@ dependencies = []
 gendiff = "gendiff.scripts.gendiff:main"
 
 [tool.hatch.build.targets.wheel]
-packeges = ["gendiff"]
+packages = ["gendiff"]
