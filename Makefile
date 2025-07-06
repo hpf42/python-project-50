@@ -15,5 +15,6 @@ build:
 
 gendiff:
 	# uv run gendiff/scripts/gendiff.py
-	uv run gendiff
+	# uv run gendiff
+	uv run python3 -m gendiff.scripts.gendiff
 
