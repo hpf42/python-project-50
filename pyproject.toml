@@ -8,6 +8,11 @@ dependencies = []
 
 [project.scripts]
 gendiff = "gendiff.scripts.gendiff:main"
+parser = "gendiff.scripts.parser:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["gendiff"]
+
+[build-system]
+request = ["hatching"]
+build-backend = "hatching.build"

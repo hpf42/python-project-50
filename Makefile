@@ -1,4 +1,4 @@
-.PHONY: clean install build gendiff package-install
+.PHONY: clean install package-install build gendiff parser 
 
 
 clean:
@@ -18,3 +18,5 @@ gendiff:
 	# uv run gendiff
 	uv run python3 -m gendiff.scripts.gendiff
 
+parser:
+	uv run python3 -m gendiff.scripts.parser
