@@ -1,6 +1,10 @@
 import argparse
 
 
+def generate_diff(file_1, file_2) -> str:
+    pass
+    return f""
+
 def main():
     print('Start')
     parser = argparse.ArgumentParser(
