@@ -20,3 +20,6 @@ gendiff:
 
 parser:
 	uv run python3 -m gendiff.scripts.parser
+
+lint:
+	uv run ruff check gendiff
