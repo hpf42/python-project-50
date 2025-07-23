@@ -1,5 +1,11 @@
 import json
 import os
+import yaml
+
+
+def get_file_format(file_path):
+    format = os.path.splitext(file_path)[1:]
+    return format
 
 
 def read_file(file_path):
@@ -7,8 +13,13 @@ def read_file(file_path):
         return file.read()
 
 
-def parse_data(data):
-    return json.loads(data)
+def parse_data(data, format):
+    if format == 'json':
+        return json.loads(data)
+    elif format == 'yaml':
+        return yaml.loads(data)
+    else:
+        print('Cannot read the file!')
 
 
 def parse_data_from_file(file_path):
