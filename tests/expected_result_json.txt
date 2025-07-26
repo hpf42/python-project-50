@@ -1,0 +1,21 @@
+{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+  - version: 1.0.0
+  + version: 1.1.0
+  settings: {
+    - mode: active
+    + mode: passive
+    - theme: dark
+    + theme: light
+    features: {
+        comments: true
+      - sharing: false
+      + sharing: true
+    }
+  }
+}
