@@ -1,15 +1,27 @@
 {
-    "host": "hexlet.io",
-    "timeout": 50,
-    "proxy": "123.234.53.22",
-    "follow": false,
-    "settings": {
-      "mode": "active",
-      "theme": "dark",
-      "features": {
-        "comments": true,
-        "sharing": false
+    "common": {
+      "setting1": "Value 1",
+      "setting2": 200,
+      "setting3": true,
+      "setting6": {
+        "key": "value",
+        "doge": {
+          "wow": ""
+        }
       }
     },
-    "version": "1.0.0"
+    "group1": {
+      "baz": "bas",
+      "foo": "bar",
+      "nest": {
+        "key": "value"
+      }
+    },
+    "group2": {
+      "abc": 12345,
+      "deep": {
+        "id": 45
+      }
+    }
   }
+  
