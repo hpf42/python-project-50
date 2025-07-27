@@ -7,7 +7,7 @@ clean:
 install:
 	uv sync
 
-package-install:
+package-install: build
 	uv tool install dist/*.whl
 
 build:
