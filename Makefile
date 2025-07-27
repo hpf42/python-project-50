@@ -16,7 +16,9 @@ build:
 gendiff:
 	# uv run gendiff/scripts/gendiff.py
 	# uv run gendiff
-	uv run python3 -m gendiff.scripts.gendiff
+	# uv run python3 -m gendiff.scripts.gendiff
+	uv run python3 -m gendiff.scripts.gendiff file1.json file2.json
+
 
 parser:
 	uv run python3 -m gendiff.scripts.parser

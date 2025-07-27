@@ -2,9 +2,9 @@ import json
 import yaml
 
 
-def get_file_format(file_path) -> str:
-    parth = file_path.split('.') > 0 else ''
-    format = parth[-1] if len(parth)
+def get_file_format(file_path: str) -> str:
+    parts = file_path.split('.')
+    format = parts[-1] if len(parts) > 1 else ''
     return format
 
 
