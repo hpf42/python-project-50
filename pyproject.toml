@@ -8,6 +8,7 @@ dependencies = [
     "requests", # ← add this line
     "pyyaml",
     "ruff>=0.12.7",
+    "pytest>=8.4.1",
 ]
 
 [project.scripts]
