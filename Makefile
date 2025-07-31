@@ -4,14 +4,18 @@
 clean:
 	rm -rf dist/ build/ *.egg-info
 
+
 install:
 	uv sync
+
 
 package-install: build
 	uv tool install dist/*.whl
 
+
 build:
 	uv build
+
 
 gendiff:
 	# uv run gendiff/scripts/gendiff.py
@@ -23,5 +27,10 @@ gendiff:
 parser:
 	uv run python3 -m gendiff.scripts.parser
 
+
 lint:
 	uv run ruff check gendiff
+
+
+check:
+	uv run pytest

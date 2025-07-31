@@ -1,6 +1,5 @@
 import itertools
 
-
 STATUS = 'status'
 ADDED = 'added'
 NESTED = 'nested'
@@ -21,15 +20,11 @@ def format_dic(diff, replacer, depth=0):
     current_indent = replacer * depth
     list_string = []
     for k, v in diff.items():
-        if not isinstance(diff, dict):
-            list_string.append(f'{indent}{k}: {v}')
-        else:
-            list_string.append(
-                f"{indent}{k}: "
-                f"{format_dic(v, replacer, deep_indent_size)}"
-            )
+        list_string.append(
+            f"{indent}{k}: {format_dic(v, replacer, deep_indent_size)}"
+        )
     result = itertools.chain('{', list_string, [current_indent + '}'])
-    return '\n'. join(result)
+    return '\n'.join(result)
 
 
 def is_bool(diff):
@@ -38,7 +33,7 @@ def is_bool(diff):
     elif diff is None:
         return 'null'
     else:
-        return diff
+        return str(diff)
 
 
 def get_stylish_format(diff, replacer=' ', add='+ ', remove='- '):
@@ -53,42 +48,48 @@ def get_stylish_format(diff, replacer=' ', add='+ ', remove='- '):
 
         list_string = []
         for key, val in current_item.items():
-            if val[STATUS] == REMOVED:
-                values = is_bool(val[VALUE])
+            status = val.get(STATUS)
+            if status == REMOVED:
+                values = is_bool(val.get(VALUE))
                 list_string.append(
-                    f"{deep_indent[: - 2]}{remove}{key}: "
-                    f"{format_dic(values, replacer, deep_indent_size)}"
+                    f"{deep_indent[:-2]} \
+                        {remove}{key}: \
+                            {format_dic(values, replacer, deep_indent_size)}"
                 )
-            elif val[STATUS] == ADDED:
-                values = is_bool(val[VALUE])
+            elif status == ADDED:
+                values = is_bool(val.get(VALUE))
                 list_string.append(
-                    f"{deep_indent[: - 2]}{add}{key}: "
-                    f"{format_dic(values, replacer, deep_indent_size)}"
+                    f"{deep_indent[:-2]} \
+                        {add}{key}: \
+                            {format_dic(values, replacer, deep_indent_size)}"
                 )
-            elif val[STATUS] == UNCHANGED:
-                values = is_bool(val[VALUE])
+            elif status == UNCHANGED:
+                values = is_bool(val.get(VALUE))
                 list_string.append(
-                    f"{deep_indent}{key}: "
-                    f"{format_dic(values, replacer, deep_indent_size)}"
+                    f"{deep_indent}{key}: \
+                        {format_dic(values, replacer, deep_indent_size)}"
                 )
-            elif val[STATUS] == UPDATED:
-                value1 = is_bool(val[VALUE])
-                value2 = is_bool(val[UPDATED_VALUE])
+            elif status == UPDATED:
+                value1 = is_bool(val.get(VALUE))
+                value2 = is_bool(val.get(UPDATED_VALUE))
                 list_string.append(
-                    f"{deep_indent[: - 2]}{remove}{key}: "
-                    f"{format_dic(value1, replacer, deep_indent_size)}"
+                    f"{deep_indent[:-2]} \
+                        {remove}{key}: \
+                            {format_dic(value1, replacer, deep_indent_size)}"
                 )
                 list_string.append(
-                    f"{deep_indent[: -2]}{add}{key}: "
-                    f"{format_dic(value2, replacer, deep_indent_size)}")
-            elif val[STATUS] == NESTED:
+                    f"{deep_indent[:-2]} \
+                        {add}{key}: \
+                            {format_dic(value2, replacer, deep_indent_size)}"
+                )
+            elif status == NESTED:
                 list_string.append(
-                    f"{deep_indent}{key}: "
-                    f"{iter_(val[VALUE], deep_indent_size)}"
+                    f"{deep_indent}{key}: \
+                        {iter_(val.get(VALUE), deep_indent_size)}"
                 )
             else:
-                raise ERROR
+                raise ValueError(f"{ERROR}: key={key}, val={val}")
         result = itertools.chain('{', list_string, [current_indent + '}'])
         return '\n'.join(result)
 
-    return iter_(item, 0)
+    return iter_(diff, 0)

@@ -16,5 +16,6 @@ def main():
     path = get_file_path()
     parse_file(path)
 
+
 if __name__ == "__main__":
     main()
