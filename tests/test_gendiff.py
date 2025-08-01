@@ -1,7 +1,7 @@
 import pytest
 
 from gendiff.scripts.generate_diff import generate_diff
-from gendiff.scripts.file_parser import parse_data_from_file
+from gendiff.scripts.file_parser import read_file
 
 
 @pytest.mark.parametrize('file_path_1, file_path_2, expected_result', [
