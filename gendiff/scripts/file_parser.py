@@ -18,7 +18,7 @@ def parse_data(data, format):
     if format == 'json':
         return json.loads(data)
     elif format == 'yaml':
-        return yaml.loads(data)
+        return yaml.safe_load(data)
     else:
         print('Cannot read the file!')
 
