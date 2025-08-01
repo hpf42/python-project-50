@@ -34,3 +34,6 @@ lint:
 
 test:
 	uv run pytest
+
+
+check: test lint
