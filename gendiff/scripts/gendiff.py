@@ -19,12 +19,15 @@ def parser_function():
     print('Finish')
     return args 
 
+
 def main():
     args = parser_function()
     first_file = args.first_file
     second_file = args.second_file
     format = args.format
     result = generate_diff(first_file, second_file, format)
+    print(result)
+
 
 if __name__ == '__main__':
     main()
