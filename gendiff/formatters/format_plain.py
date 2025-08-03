@@ -46,5 +46,5 @@ def make_plain_diff(diff, path=''):
     return '\n'.join(result)
 
 
-def format_diff_plain(diff):
+def get_plain_format(diff):
     return make_plain_diff(diff)
