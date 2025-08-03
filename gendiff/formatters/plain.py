@@ -1,10 +1,3 @@
-ADD = ' was added with value: '
-REMOVE = ' was removed'
-UPD = ' was updated. From '
-UPD2 = ' to '
-PROP = 'Property '
-
-
 def format_value(value):
     if isinstance(value, (dict, list)):
         return '[complex value]'
@@ -24,6 +17,13 @@ def make_plain_item(item, path=''):
     new_value = format_value(item.get('new_value'))
     old_value = format_value(item.get('old_value'))
     current_path = f"{path}.{key}" if path else key
+
+    ADD = ' was added with value: '
+    REMOVE = ' was removed'
+    UPD = ' was updated. From '
+    UPD2 = ' to '
+    PROP = 'Property '
+
     if action == 'added':
         return f"{PROP}'{current_path}'{ADD}{new_value}"
     if action == 'deleted':
@@ -46,5 +46,5 @@ def make_plain_diff(diff, path=''):
     return '\n'.join(result)
 
 
-def get_plain_format(diff):
+def format_diff_plain(diff):
     return make_plain_diff(diff)

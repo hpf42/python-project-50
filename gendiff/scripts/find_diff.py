@@ -22,44 +22,44 @@ def items_unchanged(key, value):
     }
 
 
-def items_modified(key, value_1, value_2):
+def items_modified(key, value1, value2):
     return {
         'action': 'modified',
         'name': key,
-        'new_value': value_2,
-        'old_value': value_1
+        'new_value': value2,
+        'old_value': value1
     }
 
 
-def items_nested(key, value_1, value_2):
+def items_nested(key, value1, value2):
     return {
         'action': 'nested',
         'name': key,
-        'children': find_diff(value_1, value_2)
+        'children': find_diff(value1, value2)
     }
 
 
-def find_diff(data_1, data_2):
-    keys_union = data_1.keys() | data_2.keys()
-    keys_added = data_2.keys() - data_1.keys()
-    keys_deleted = data_1.keys() - data_2.keys()
+def find_diff(data1, data2):
+    keys_union = data1.keys() | data2.keys()
+    keys_added = data2.keys() - data1.keys()
+    keys_deleted = data1.keys() - data2.keys()
 
     diff = []
 
     for key in keys_union:
-        value_1 = data_1.get(key)
-        value_2 = data_2.get(key)
+        value1 = data1.get(key)
+        value2 = data2.get(key)
 
         if key in keys_added:
-            diff.append(item_add(key, value_2))
+            diff.append(item_add(key, value2))
         elif key in keys_deleted:
-            diff.append(item_delete(key, value_1))
-        elif isinstance(value_1, dict) and isinstance(value_2, dict):
-            diff.append(items_nested(key, value_1, value_2))
-        elif value_1 != value_2:
-            diff.append(items_modified(key, value_1, value_2))
+            diff.append(item_delete(key, value1))
+        elif isinstance(value1, dict) and isinstance(value2, dict):
+            diff.append(items_nested(key, value1, value2))
+        elif value1 != value2:
+            diff.append(items_modified(key, value1, value2))
         else:
-            diff.append(items_unchanged(key, value_1))
+            diff.append(items_unchanged(key, value1))
 
     sorted_diff = sorted(diff, key=lambda x: x['name'])
 

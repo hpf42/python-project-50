@@ -17,8 +17,9 @@ def read_file(file_path):
 def parse_data(data, format):
     if format == 'json':
         return json.loads(data)
-    if format == 'yaml':
+    if format == 'yaml' or format == 'yml':
         return yaml.safe_load(data)
+    raise ValueError(f'Unsupported file format: {format}')
 
 
 def parse_data_from_file(file_path):
