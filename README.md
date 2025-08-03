@@ -5,4 +5,7 @@
 [![hexlet-check](https://github.com/hpf42/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/hpf42/python-project-50/actions/workflows/hexlet-check.yml)
 
 
-[![Python CI](https://github.com/hpf42/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/hpf42/python-project-50/actions/workflows/pyci.yml)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hpf42_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hpf42_python-project-50)
+
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hpf42_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hpf42_python-project-50)
