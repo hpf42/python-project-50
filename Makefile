@@ -1,4 +1,4 @@
-.PHONY: clean install package-install build gendiff parser 
+.PHONY: clean install package-install build gendiff parser lint test test-coverage check run
 
 
 clean:
@@ -36,4 +36,12 @@ test:
 	uv run pytest
 
 
+test-coverage:
+	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
+
+
 check: test lint
+
+
+run:
+	uv run gendiff
