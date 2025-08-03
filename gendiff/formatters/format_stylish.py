@@ -1,95 +1,53 @@
-import itertools
-
-STATUS = 'status'
-ADDED = 'added'
-NESTED = 'nested'
-REMOVED = 'removed'
-UNCHANGED = 'unchanged'
-UPDATED = 'updated'
-VALUE = 'value'
-UPDATED_VALUE = 'updated_value'
-ERROR = 'Object has no STATUS'
-INDENT_STEP = 4
+SEPARATOR = " "
+ADD = '+ '
+DEL = '- '
+NONE = '  '
 
 
-def format_dic(diff, replacer, depth=0):
-    if not isinstance(diff, dict):
-        return str(diff)
-    deep_indent_size = depth + INDENT_STEP
-    indent = replacer * deep_indent_size
-    current_indent = replacer * depth
-    list_string = []
-    for k, v in diff.items():
-        list_string.append(
-            f"{indent}{k}: {format_dic(v, replacer, deep_indent_size)}"
-        )
-    result = itertools.chain('{', list_string, [current_indent + '}'])
-    return '\n'.join(result)
+def format_value(value, spaces_count=2):
+    if value is None:
+        return "null"
+    if isinstance(value, bool):
+        return str(value).lower()
+    if isinstance(value, dict):
+        indent = SEPARATOR * (spaces_count + 4)
+        result_lines = []
+        for key, inner_value in value.items():
+            formatted_value = format_value(inner_value, spaces_count + 4)
+            result_lines.append(f"{indent}{NONE}{key}: {formatted_value}")
+        formatted_string = '\n'.join(result_lines)
+        end_indent = SEPARATOR * (spaces_count + 2)
+        return f"{{\n{formatted_string}\n{end_indent}}}"
+    return f"{value}"
 
 
-def is_bool(diff):
-    if type(diff) is bool:
-        return str(diff).lower()
-    elif diff is None:
-        return 'null'
-    else:
-        return str(diff)
+def make_stylish_diff(diff, spaces_count=2):
+    indent = SEPARATOR * spaces_count
+    lines = []
+    for item in diff:
+        key = item['name']
+        action = item['action']
+        value = format_value(item.get('value'), spaces_count)
+        old_value = format_value(item.get('old_value'), spaces_count)
+        new_value = format_value(item.get('new_value'), spaces_count)
+
+        if action == "unchanged":
+            lines.append(f"{indent}{NONE}{key}: {value}")
+        elif action == "modified":
+            lines.append(f"{indent}{DEL}{key}: {old_value}")
+            lines.append(f"{indent}{ADD}{key}: {new_value}")
+        elif action == "deleted":
+            lines.append(f"{indent}{DEL}{key}: {old_value}")
+        elif action == "added":
+            lines.append(f"{indent}{ADD}{key}: {new_value}")
+        elif action == 'nested':
+            children = make_stylish_diff(item.get("children"), spaces_count + 4)
+            lines.append(f"{indent}{NONE}{key}: {children}")
+    formatted_string = '\n'.join(lines)
+    end_indent = SEPARATOR * (spaces_count - 2)
+
+    return f"{{\n{formatted_string}\n{end_indent}}}"
 
 
-def get_stylish_format(diff, replacer=' ', add='+ ', remove='- '):
-
-    def iter_(current_item, depth):
-        if not isinstance(current_item, dict):
-            return str(current_item)
-
-        deep_indent_size = depth + INDENT_STEP
-        deep_indent = replacer * deep_indent_size
-        current_indent = replacer * depth
-
-        list_string = []
-        for key, val in current_item.items():
-            status = val.get(STATUS)
-            if status == REMOVED:
-                values = is_bool(val.get(VALUE))
-                list_string.append(
-                    f"{deep_indent[:-2]} \
-                        {remove}{key}: \
-                            {format_dic(values, replacer, deep_indent_size)}"
-                )
-            elif status == ADDED:
-                values = is_bool(val.get(VALUE))
-                list_string.append(
-                    f"{deep_indent[:-2]} \
-                        {add}{key}: \
-                            {format_dic(values, replacer, deep_indent_size)}"
-                )
-            elif status == UNCHANGED:
-                values = is_bool(val.get(VALUE))
-                list_string.append(
-                    f"{deep_indent}{key}: \
-                        {format_dic(values, replacer, deep_indent_size)}"
-                )
-            elif status == UPDATED:
-                value1 = is_bool(val.get(VALUE))
-                value2 = is_bool(val.get(UPDATED_VALUE))
-                list_string.append(
-                    f"{deep_indent[:-2]} \
-                        {remove}{key}: \
-                            {format_dic(value1, replacer, deep_indent_size)}"
-                )
-                list_string.append(
-                    f"{deep_indent[:-2]} \
-                        {add}{key}: \
-                            {format_dic(value2, replacer, deep_indent_size)}"
-                )
-            elif status == NESTED:
-                list_string.append(
-                    f"{deep_indent}{key}: \
-                        {iter_(val.get(VALUE), deep_indent_size)}"
-                )
-            else:
-                raise ValueError(f"{ERROR}: key={key}, val={val}")
-        result = itertools.chain('{', list_string, [current_indent + '}'])
-        return '\n'.join(result)
-
-    return iter_(diff, 0)
+def format_diff_stylish(data):
+    return make_stylish_diff(data)
