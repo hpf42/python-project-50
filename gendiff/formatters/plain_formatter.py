@@ -42,9 +42,8 @@ def make_plain_diff(diff, path=''):
         formatted_item = make_plain_item(item, path)
         if formatted_item is not None:
             result.append(formatted_item)
-
     return '\n'.join(result)
 
 
-def format_diff_plain(diff):
+def get_plain_format(diff):
     return make_plain_diff(diff)

@@ -20,10 +20,10 @@ def parser_function():
 def main():
     args = parser_function()
 
-    file_path1 = args.first_file
-    file_path2 = args.second_file
+    file_path_1 = args.first_file
+    file_path_2 = args.second_file
 
-    result = generate_diff(file_path1, file_path2, formatter=args.format)
+    result = generate_diff(file_path_1, file_path_2, formatter=args.format)
     print(result)
 
 

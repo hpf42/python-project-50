@@ -1,14 +1,14 @@
-from gendiff.formatters.json_formatter import format_diff_json
-from gendiff.formatters.plain import format_diff_plain
-from gendiff.formatters.stylish import format_diff_stylish
+from gendiff.formatters.json_formatter import get_json_format
+from gendiff.formatters.plain_formatter import get_plain_format
+from gendiff.formatters.stylish_formatter import get_stylish_format
 
 
 def format_identifier(diff, formatter):
     if formatter == 'stylish':
-        return format_diff_stylish(diff)
+        return get_stylish_format(diff)
     if formatter == 'plain':
-        return format_diff_plain(diff)
+        return get_plain_format(diff)
     if formatter == 'json':
-        return format_diff_json(diff)
+        return get_json_format(diff)
     else:
         raise ValueError(f"Unsupported formatter: {formatter}")

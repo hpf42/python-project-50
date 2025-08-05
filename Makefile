@@ -1,4 +1,4 @@
-.PHONY: clean install package-install build gendiff parser lint test test-coverage check run
+.PHONY: clean install package-install build gendiff lint test check
 
 
 clean:
@@ -17,17 +17,6 @@ build:
 	uv build
 
 
-gendiff:
-	# uv run gendiff/scripts/gendiff.py
-	# uv run gendiff
-	# uv run python3 -m gendiff.scripts.gendiff
-	uv run python3 -m gendiff.scripts.gendiff #file1.json file2.json
-
-
-parser:
-	uv run python3 -m gendiff.scripts.parser
-
-
 lint:
 	uv run ruff check gendiff
 
@@ -36,12 +25,8 @@ test:
 	uv run pytest
 
 
-test-coverage:
-	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
-
-
 check: test lint
 
 
-run:
+gendiff:
 	uv run gendiff

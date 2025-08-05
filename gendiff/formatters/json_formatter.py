@@ -1,5 +1,7 @@
 import json
 
 
-def format_diff_json(diff):
-    return json.dumps(diff, indent=4, separators=(',', ': '))
+def get_json_format(diff):
+    indent = 4
+    separators = (',', ': ')
+    return json.dumps(diff, indent=indent, separators=separators)
