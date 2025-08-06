@@ -5,9 +5,9 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "requests", # ← add this line
+    "requests",
     "pyyaml",
-    "ruff>=0.12.7",
+    "ruff<=0.9.7",
     "pytest>=8.4.1",
     "pytest-cov>=6.2.1",
 ]

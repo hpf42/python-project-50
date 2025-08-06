@@ -1,4 +1,4 @@
-.PHONY: clean install package-install build gendiff lint test check
+.PHONY: clean install package-install build gendiff lint test check test-coverage
 
 
 clean:
@@ -23,6 +23,10 @@ lint:
 
 test:
 	uv run pytest
+
+
+test-coverage:
+	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
 
 
 check: test lint
