@@ -11,4 +11,6 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hpf42_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hpf42_python-project-50)
 
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=hpf42_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=hpf42_python-project-50)
+
 https://asciinema.org/connect/8b849b3c-6dd1-4384-b115-280861e683f8

@@ -3,3 +3,4 @@
 *.cast
 __pycache__/
 *.egg-info/
+.coverage
